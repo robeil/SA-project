@@ -8,6 +8,7 @@ import com.robeil.borrowingsservice.model.Book;
 import com.robeil.borrowingsservice.model.Borrower;
 import com.robeil.borrowingsservice.model.Customer;
 import com.robeil.borrowingsservice.service.BorrowerService;
+import com.robeil.borrowingsservice.service.dto.BorrowerDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.messaging.handler.annotation.Payload;
@@ -77,7 +78,7 @@ public class Listener {
                 List<Book> books = Arrays.asList(bookAdded.getDescription());
 
                 int borrowerNumber = customerToUpdate.getDescription().getCustomerNumber();
-                Borrower borrowerToUpdate = borrowerService.getBorrowerByNumber(borrowerNumber);
+                BorrowerDTO borrowerToUpdate = borrowerService.getBorrowerByNumber(borrowerNumber);
 
                 borrowerService.updateBorrower(borrowerNumber,new Borrower(
                         borrowerToUpdate.getBorrowerNumber(),

@@ -23,17 +23,17 @@ public class BorrowerController {
     }
 
     @GetMapping("/get/{borrowerNumber}")
-    public Borrower getBorrower(@PathVariable int borrowerNumber){
+    public BorrowerDTO getBorrower(@PathVariable int borrowerNumber){
         return borrowerService.getBorrowerByNumber(borrowerNumber);
     }
 
     @GetMapping("/list")
-    public List<Borrower> getAllBorrowers(){
+    public List<BorrowerDTO> getAllBorrowers(){
         return borrowerService.getAllBorrowers();
     }
 
     @PutMapping("/update/{borrowerNumber}")
-    public Borrower updateBorrower(@PathVariable int borrowerNumber, @RequestBody Borrower borrower){
+    public BorrowerDTO updateBorrower(@PathVariable int borrowerNumber, @RequestBody Borrower borrower){
         return borrowerService.updateBorrower(borrowerNumber,borrower);
     }
 
