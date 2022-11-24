@@ -7,5 +7,5 @@ public interface BookService {
 
     void addNewBook(Book book);
     void deleteBook(String isbn);
-    Book updateBook(String isbn, Book book);
+    BookDTO updateBook(String isbn, Book book);
 }

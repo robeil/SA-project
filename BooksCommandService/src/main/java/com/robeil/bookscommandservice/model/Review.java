@@ -16,6 +16,5 @@ public class Review {
     @Range(min = 0, max = 5)
     private int reviewRate;
     private String isbn;
-//    private Customer customer;
 
 }

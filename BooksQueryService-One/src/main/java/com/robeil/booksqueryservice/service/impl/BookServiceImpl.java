@@ -22,12 +22,12 @@ public class BookServiceImpl implements BookService {
     private ModelMapper modelMapper;
 
     @Override
-    public List<Book> getAllBooks() {
+    public List<BookDTO> getAllBooks() {
         var allBooks = bookRepository.findAll();
-        return allBooks;
-//        return allBooks.stream()
-//                .map(book -> modelMapper.map(book, BookDTO.class))
-//                .collect(Collectors.toList());
+
+        return allBooks.stream()
+                .map(book -> modelMapper.map(book, BookDTO.class))
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -36,7 +36,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Book updateBook(String isbn, Book book) {
+    public BookDTO updateBook(String isbn, Book book) {
         var bookToUpdate = bookRepository.findBookByIsbn(isbn);
         if(bookToUpdate != null){
             bookToUpdate.setBookTitle(bookToUpdate.getBookTitle());
@@ -46,7 +46,7 @@ public class BookServiceImpl implements BookService {
             bookToUpdate.setDescription(book.getDescription());
             bookRepository.save(bookToUpdate);
         }
-        return bookToUpdate;
+        return modelMapper.map(bookToUpdate, BookDTO.class);
     }
 
     @Override
@@ -65,7 +65,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Book getBookByIsbn(String isbn) {
-        return bookRepository.findBookByIsbn(isbn);
+    public BookDTO getBookByIsbn(String isbn) {
+        return modelMapper.map(bookRepository.findBookByIsbn(isbn), BookDTO.class);
     }
 }

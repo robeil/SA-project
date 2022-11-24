@@ -24,13 +24,13 @@ public class CustomerServiceImpl implements CustomerService {
     private Sender sender;
 
     @Override
-    public List<Customer> getAllCustomer() {
+    public List<CustomerDTO> getAllCustomer() {
         var allCustomer =  customerRepository.findAll();
-        return allCustomer;
-//        return  allCustomer.stream()
-//                .map(customer ->
-//                    modelMapper.map(customer, CustomerDTO.class)
-//                ).collect(Collectors.toList());
+
+        return  allCustomer.stream()
+                .map(customer ->
+                    modelMapper.map(customer, CustomerDTO.class)
+                ).collect(Collectors.toList());
     }
 
     @Override
@@ -62,7 +62,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public Customer updateCustomer(int customerNumber, Customer customer) {
+    public CustomerDTO updateCustomer(int customerNumber, Customer customer) {
         var customerToUpdate = customerRepository.findById(customerNumber).get();
         System.out.println("Publishing updateCustomer from customerService");
         System.out.println("From this ====> " + customerToUpdate);
@@ -80,15 +80,15 @@ public class CustomerServiceImpl implements CustomerService {
                 new ChangeEvent<Customer>("updateCustomer",customerToUpdate);
         sender.send(changedCustomer);
         System.out.println("To this ===> " + customer);
-        return customerToUpdate; //modelMapper.map(customerToUpdate, CustomerDTO.class);
+        return modelMapper.map(customerToUpdate, CustomerDTO.class);
     }
 
     @Override
-    public Customer getCustomerByCustomerNumber(int customerNumber) {
+    public CustomerDTO getCustomerByCustomerNumber(int customerNumber) {
         var customer = customerRepository.findById(customerNumber);
         if(!customer.isPresent()){
             throw new RuntimeException("No Customer with this id");
         }
-        return customer.get();
+        return modelMapper.map(customer.get(), CustomerDTO.class);
     }
 }

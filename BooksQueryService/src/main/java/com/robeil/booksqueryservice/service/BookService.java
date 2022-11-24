@@ -8,11 +8,11 @@ import java.util.List;
 
 public interface BookService {
 
-    List<Book> getAllBooks();
+    List<BookDTO> getAllBooks();
     void addNewBook(Book book);
-    Book getBookByIsbn(String isbn);
+    BookDTO getBookByIsbn(String isbn);
     void deleteBook(String bookTitle);
-    Book updateBook(String isbn, Book book);
+    BookDTO updateBook(String isbn, Book book);
     void addReviewToBook(String isbn, Review review);
 
 

@@ -4,6 +4,7 @@ import com.robeil.borrowingsservice.model.Book;
 import com.robeil.borrowingsservice.model.Borrower;
 import com.robeil.borrowingsservice.model.Customer;
 import com.robeil.borrowingsservice.repository.BorrowerRepository;
+import com.robeil.borrowingsservice.service.dto.BookDTO;
 import com.robeil.borrowingsservice.service.dto.BorrowerDTO;
 import com.robeil.borrowingsservice.service.BorrowerService;
 import org.modelmapper.ModelMapper;
@@ -22,12 +23,12 @@ public class BorrowerServiceImpl implements BorrowerService {
     private ModelMapper modelMapper;
 
     @Override
-    public List<Borrower> getAllBorrowers() {
+    public List<BorrowerDTO> getAllBorrowers() {
         var allBorrowers = borrowerRepository.findAll();
-        return allBorrowers;
-//        return allBorrowers.stream()
-//                .map(borrower -> modelMapper.map(borrower, BorrowerDTO.class))
-//                .collect(Collectors.toList());
+
+        return allBorrowers.stream()
+                .map(borrower -> modelMapper.map(borrower, BorrowerDTO.class))
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -41,7 +42,7 @@ public class BorrowerServiceImpl implements BorrowerService {
     }
 
     @Override
-    public Borrower updateBorrower(int borrowerNumber, Borrower borrower) {
+    public BorrowerDTO updateBorrower(int borrowerNumber, Borrower borrower) {
         var borrowerToUpdate = borrowerRepository.findByBorrowerNumber(borrowerNumber);
 
         if(borrowerToUpdate != null){
@@ -51,13 +52,13 @@ public class BorrowerServiceImpl implements BorrowerService {
             borrowerToUpdate.setCustomer(borrower.getCustomer());
             borrowerRepository.save(borrowerToUpdate);
         }
-        return borrowerToUpdate;//modelMapper.map(borrowerToUpdate, BorrowerDTO.class);
+        return modelMapper.map(borrowerToUpdate, BorrowerDTO.class);
     }
 
     @Override
-    public Borrower getBorrowerByNumber(int borrowerNumber) {
+    public BorrowerDTO getBorrowerByNumber(int borrowerNumber) {
         var borrower = borrowerRepository.findByBorrowerNumber(borrowerNumber);
-        return borrower; //modelMapper.map(borrower, BorrowerDTO.class);
+        return modelMapper.map(borrower, BorrowerDTO.class);
     }
 
     @Override
@@ -79,11 +80,11 @@ public class BorrowerServiceImpl implements BorrowerService {
      * Handling the data the came from kafka
      */
     @Override
-    public Borrower handleBorrowerDetails(int borrowerNumber, Customer customer, List<Book> books){
+    public BorrowerDTO handleBorrowerDetails(int borrowerNumber, Customer customer, List<Book> books){
         Borrower borrower = borrowerRepository.findByBorrowerNumber(borrowerNumber);
         borrower.setCustomer(customer);
         borrower.setBooks(books);
-        return borrower;
+        return modelMapper.map(borrower, BorrowerDTO.class);
     }
 
     @Override

@@ -9,14 +9,14 @@ import java.util.List;
 
 public interface BorrowerService {
 
-    List<Borrower> getAllBorrowers();
+    List<BorrowerDTO> getAllBorrowers();
     void addNewBorrower(Borrower borrower);
     void deleteBorrower(int borrowerNumber);
     void removeBookFromBorrower(String bookIsbn);
-    Borrower getBorrowerByNumber(int borrowerNumber);
+    BorrowerDTO getBorrowerByNumber(int borrowerNumber);
     void updateBorrowerBook(String bookIsbn, Book book);
-    Borrower updateBorrower(int borrowerNumber, Borrower borrower);
-    Borrower handleBorrowerDetails(int borrowerNumber, Customer customer, List<Book> books);
+    BorrowerDTO updateBorrower(int borrowerNumber, Borrower borrower);
+    BorrowerDTO handleBorrowerDetails(int borrowerNumber, Customer customer, List<Book> books);
 
 
 }

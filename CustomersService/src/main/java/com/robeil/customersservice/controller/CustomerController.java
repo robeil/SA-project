@@ -22,18 +22,18 @@ public class CustomerController {
         customerService.addNewCustomer(customer);
     }
     @GetMapping("/list")
-    public List<Customer> getCustomer(){
+    public List<CustomerDTO> getCustomer(){
         return customerService.getAllCustomer();
     }
 
     @GetMapping("/get/{customerNumber}")
-    public Customer getCustomerByNumber(@PathVariable int customerNumber){
+    public CustomerDTO getCustomerByNumber(@PathVariable int customerNumber){
         return customerService.getCustomerByCustomerNumber(customerNumber);
 
     }
 
     @PutMapping("/update/{customerNumber}")
-    public Customer updateCustomer(@PathVariable Integer customerNumber, @RequestBody Customer customer){
+    public CustomerDTO updateCustomer(@PathVariable Integer customerNumber, @RequestBody Customer customer){
         return customerService.updateCustomer(customerNumber,customer);
     }
     @DeleteMapping("/delete/{customerNumber}")

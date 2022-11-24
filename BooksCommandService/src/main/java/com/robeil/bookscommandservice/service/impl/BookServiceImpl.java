@@ -46,7 +46,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Book updateBook(String isbn, Book book) {
+    public BookDTO updateBook(String isbn, Book book) {
         var bookToUpdate = bookRepository.findBookByIsbn(isbn);
         System.out.println("Publishing updateBook from BooksCommandService");
         System.out.println("From this ====> " + bookToUpdate);
@@ -60,10 +60,10 @@ public class BookServiceImpl implements BookService {
         /**
          * Publishing updated book
          */
-
+        BookDTO bookDTO = modelMapper.map(bookToUpdate, BookDTO.class);
         ChangeEvent<Book> changedBook = new ChangeEvent<Book>("updateBook", book);
         sender.send(changedBook);
         System.out.println("To this ====> " + bookToUpdate);
-        return bookToUpdate;
+        return bookDTO;
     }
 }

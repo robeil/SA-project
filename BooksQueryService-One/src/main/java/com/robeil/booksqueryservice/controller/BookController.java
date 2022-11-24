@@ -20,12 +20,12 @@ public class BookController {
     private BookService bookService;
 
     @GetMapping("/list")
-    public List<Book> getBooks(){
+    public List<BookDTO> getBooks(){
         return bookService.getAllBooks();
     }
 
     @GetMapping("/get/{isbn}")
-    public Book getBookByIsbn(@PathVariable String isbn){
+    public BookDTO getBookByIsbn(@PathVariable String isbn){
       return bookService.getBookByIsbn(isbn);
     }
 }
