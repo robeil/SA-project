@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/BooksCommandService/BooksCommandService.iml" filepath="$PROJECT_DIR$/BooksCommandService/BooksCommandService.iml" />
+      <module fileurl="file://$PROJECT_DIR$/BooksQueryService/BooksQueryService.iml" filepath="$PROJECT_DIR$/BooksQueryService/BooksQueryService.iml" />
+      <module fileurl="file://$PROJECT_DIR$/BorrowingsService/BorrowingsService.iml" filepath="$PROJECT_DIR$/BorrowingsService/BorrowingsService.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CustomersService/CustomersService.iml" filepath="$PROJECT_DIR$/CustomersService/CustomersService.iml" />
+      <module fileurl="file://$PROJECT_DIR$/EurekaServer/EurekaServer.iml" filepath="$PROJECT_DIR$/EurekaServer/EurekaServer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ReviewService/ReviewService.iml" filepath="$PROJECT_DIR$/ReviewService/ReviewService.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/SA-project.iml" filepath="$PROJECT_DIR$/.idea/SA-project.iml" />
+    </modules>
+  </component>
+</project>
